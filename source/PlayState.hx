@@ -1,19 +1,21 @@
 package;
 
+import buttons.Cookie;
 import flixel.FlxState;
 import flixel.text.FlxText;
 
 class PlayState extends FlxState
 {
-	var hello:String = "Hello World!";
+	var cookie:Cookie;
+
 
 	override public function create()
 	{
 		super.create();
 
-		var helloText:FlxText = new FlxText();
-		helloText.text = hello;
-		add(helloText);
+		cookie = new Cookie(0, 0);
+
+		add(cookie);
 	}
 
 	override public function update(elapsed:Float)

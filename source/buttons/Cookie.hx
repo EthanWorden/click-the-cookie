@@ -15,7 +15,7 @@ class Cookie extends FlxSprite
 
         loadGraphic("assets/images/cookie.png");
 
-		scale.set(10, 10);
+		scale.set(8, 8);
 		updateHitbox();
     }
 
@@ -26,6 +26,6 @@ class Cookie extends FlxSprite
 	public function clickTheCookie()
 	{
 		score = score + (1 * scoreMultiplier);
-		trace(Std.string(score));
+		// trace(Std.string(score));
 	}
 }

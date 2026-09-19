@@ -10,9 +10,12 @@ class Cookie extends FlxSprite
     {
         super(x, y);
 
+		score = 0;
+
         loadGraphic("assets/images/cookie.png");
 
-        score = 0;
+		scale.set(10, 10);
+		updateHitbox();
     }
 
     override public function update(elaspsed:Float):Void 

@@ -1,5 +1,6 @@
 package buttons;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 
 class Cookie extends FlxSprite
@@ -26,6 +27,7 @@ class Cookie extends FlxSprite
 	public function clickTheCookie()
 	{
 		score = score + (1 * scoreMultiplier);
+		FlxG.sound.play("assets/sounds/click.ogg");
 		// trace(Std.string(score));
 	}
 }

@@ -34,6 +34,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		// cookie controls
 		if (FlxG.mouse.overlaps(cookie))
 		{
 			cookie.scale.set(9, 9);

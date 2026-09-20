@@ -1,16 +1,20 @@
 package;
 
 import buttons.Cookie;
+import buttons.Cursor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
+import flixel.util.FlxTimer;
 
 class PlayState extends FlxState
 {
 	var cookie:Cookie;
 	var background:FlxSprite;
 	var scoreText:FlxText;
+
+	var cursorUpgrade:Cursor;
 
 	override public function create()
 	{
@@ -28,6 +32,10 @@ class PlayState extends FlxState
 		scoreText.text = Std.string(cookie.score);
 		scoreText.size = 50;
 		add(scoreText);
+
+		cursorUpgrade = new Cursor(0, 0);
+		cursorUpgrade.timesPurchased = 0;
+		add(cursorUpgrade);
 
 	}
 
@@ -54,6 +62,18 @@ class PlayState extends FlxState
 		if (!FlxG.mouse.overlaps(cookie))
 		{
 			cookie.scale.set(8, 8);
+		}
+		updateScoreFromUpgrades();
+	}
+
+	public function updateScoreFromUpgrades()
+	{
+		for (i in 0...cursorUpgrade.timesPurchased)
+		{
+			var timer = new FlxTimer().start(10.0, function(timer:FlxTimer)
+			{
+				cookie.score = cookie.score + 1;
+			});
 		}
 	}
 }

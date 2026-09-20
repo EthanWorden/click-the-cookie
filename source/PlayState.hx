@@ -38,7 +38,7 @@ class PlayState extends FlxState
 		cursorUpgrade = new Cursor(680, 0);
 		add(cursorUpgrade);
 
-		grandmaUpgrade = new Grandma(680, 150);
+		grandmaUpgrade = new Grandma(680, 170);
 		add(grandmaUpgrade);
 
 		updateScoreFromCursor();

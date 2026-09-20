@@ -21,10 +21,10 @@ class BaseUpgrade extends FlxSpriteGroup
     {
 		super(x, y);
 
-		backingOL = new FlxSprite(0, 0);
-		backingOL.makeGraphic(504, 154, FlxColor.BLACK);
+		// backingOL = new FlxSprite(0, 0);
+		// backingOL.makeGraphic(510, 160, FlxColor.BLACK);
 
-		backing = new FlxSprite(4, 4);
+		backing = new FlxSprite();
 		backing.makeGraphic(500, 150, FlxColor.GRAY);
 
 		add(backing);

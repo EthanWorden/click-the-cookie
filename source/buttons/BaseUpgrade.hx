@@ -1,5 +1,6 @@
 package buttons;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
@@ -51,5 +52,7 @@ class BaseUpgrade extends FlxSpriteGroup
         cost = Std.int(basePrice * Math.pow(1.15, timesPurchased));
 		costText.text = "$" + Std.string(cost);
 		ownedText.text = "Owned: " + Std.string(timesPurchased);
+		FlxG.sound.play("assets/sounds/click.ogg");
+		FlxG.sound.play("assets/sounds/purchase.ogg");
     }
 }

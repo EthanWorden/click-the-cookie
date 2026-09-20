@@ -124,6 +124,7 @@ class PlayState extends FlxState
 		{
 			FlxG.save.erase();
 			FlxG.resetState();
+			FlxG.sound.play("assets/sounds/reset.ogg");
 		}
 	}
 }

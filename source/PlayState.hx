@@ -44,6 +44,8 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		saveGame();
+		
 		// cookie controls
 		if (FlxG.mouse.overlaps(cookie))
 		{
@@ -84,5 +86,11 @@ class PlayState extends FlxState
 			scoreText.text = Std.string(cookie.score);
 			updateScoreFromUpgrades();
 		});
+	}
+	public function saveGame()
+	{
+		FlxG.save.data.score = cookie.score;
+		FlxG.save.data.cursorOwned = cursorUpgrade.timesPurchased;
+		FlxG.save.flush();
 	}
 }

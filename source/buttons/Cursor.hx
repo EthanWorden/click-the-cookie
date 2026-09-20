@@ -1,6 +1,6 @@
 package buttons;
 
-import flixel.util.FlxTimer;
+import flixel.FlxG;
 
 class Cursor extends BaseUpgrade
 {
@@ -8,8 +8,17 @@ class Cursor extends BaseUpgrade
     {
 		upgradeName = "Cursor";
         basePrice = 15;
-        cost = basePrice;
-        timesPurchased = 0;
+		if (FlxG.save.data.cursorOwned != null)
+		{
+			timesPurchased = FlxG.save.data.cursorOwned;
+			cost = Std.int(basePrice * Math.pow(1.15, timesPurchased));
+		}
+		else
+		{
+			timesPurchased = 0;
+			cost = basePrice;
+		}
+        
 		super(x, y);
     }
 }

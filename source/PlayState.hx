@@ -37,6 +37,8 @@ class PlayState extends FlxState
 		cursorUpgrade.timesPurchased = 0;
 		add(cursorUpgrade);
 
+		updateScoreFromUpgrades();
+
 	}
 
 	override public function update(elapsed:Float)
@@ -63,17 +65,24 @@ class PlayState extends FlxState
 		{
 			cookie.scale.set(8, 8);
 		}
-		updateScoreFromUpgrades();
+		if (FlxG.mouse.overlaps(cursorUpgrade) && FlxG.mouse.justPressed && cookie.score >= cursorUpgrade.cost)
+		{
+			cookie.score = cookie.score - cursorUpgrade.cost;
+			cursorUpgrade.buyUpgrade();
+			scoreText.text = Std.string(cookie.score);
+		}
 	}
 
 	public function updateScoreFromUpgrades()
 	{
-		for (i in 0...cursorUpgrade.timesPurchased)
+		var timer = new FlxTimer().start(10.0, function(timer:FlxTimer)
 		{
-			var timer = new FlxTimer().start(10.0, function(timer:FlxTimer)
+			for (i in 0...cursorUpgrade.timesPurchased)
 			{
 				cookie.score = cookie.score + 1;
-			});
-		}
+			}
+			scoreText.text = Std.string(cookie.score);
+			updateScoreFromUpgrades();
+		});
 	}
 }

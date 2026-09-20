@@ -1,30 +1,42 @@
 package buttons;
 
 import flixel.FlxSprite;
+import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
-class BaseUpgrade extends FlxSprite
+class BaseUpgrade extends FlxSpriteGroup
 {
     public var cost:Int;
     public var basePrice:Int;
     public var timesPurchased:Int;
 	public var upgradeName:String;
+	var backing:FlxSprite;
+	var upgradeText:FlxText;
+	var costText:FlxText;
+	var ownedText:FlxText;
 
     public function new(x:Float, y:Float)
     {
-        super(x, y);
-		makeGraphic(500, 150, FlxColor.GRAY);
+		super(x, y);
 
-		var upgradeText:FlxText = new FlxText();
+		backing = new FlxSprite();
+		backing.makeGraphic(500, 150, FlxColor.GRAY);
+		add(backing);
+
+		upgradeText = new FlxText(10, 10);
 		upgradeText.text = upgradeName;
 		upgradeText.size = 50;
-		stamp(upgradeText, 10, 10);
+		add(upgradeText);
 
-		var costText:FlxText = new FlxText();
+		costText = new FlxText(300, 10);
 		costText.text = "$" + Std.string(cost);
 		costText.size = 50;
-		stamp(costText, 300, 10);
+		add(costText);
+		ownedText = new FlxText(10, 70);
+		ownedText.text = "Owned: " + Std.string(timesPurchased);
+		ownedText.size = 50;
+		add(ownedText);
     }
 
     public function buyUpgrade()
@@ -32,5 +44,7 @@ class BaseUpgrade extends FlxSprite
         timesPurchased = timesPurchased + 1;
 
         cost = Std.int(basePrice * Math.pow(1.15, timesPurchased));
+		costText.text = "$" + Std.string(cost);
+		ownedText.text = "Owned: " + Std.string(timesPurchased);
     }
 }

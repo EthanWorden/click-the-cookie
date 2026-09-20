@@ -41,7 +41,8 @@ class PlayState extends FlxState
 		grandmaUpgrade = new Grandma(680, 150);
 		add(grandmaUpgrade);
 
-		updateScoreFromUpgrades();
+		updateScoreFromCursor();
+		updateScoreFromGrandma();
 
 	}
 
@@ -49,6 +50,8 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		saveGame();
+
+		scoreText.text = Std.string(cookie.score);
 		
 		// cookie controls
 		if (FlxG.mouse.overlaps(cookie))
@@ -80,32 +83,37 @@ class PlayState extends FlxState
 		if (FlxG.mouse.overlaps(grandmaUpgrade) && FlxG.mouse.justPressed && cookie.score >= grandmaUpgrade.cost)
 		{
 			cookie.score = cookie.score - grandmaUpgrade.cost;
-			cursorUpgrade.buyUpgrade();
+			grandmaUpgrade.buyUpgrade();
 			scoreText.text = Std.string(cookie.score);
 		}
 	}
 
-	public function updateScoreFromUpgrades()
+	public function updateScoreFromCursor()
 	{
-		var cursorTimer = new FlxTimer().start(10.0, function(timer:FlxTimer)
+		var timer = new FlxTimer().start(10.0, function(timer:FlxTimer)
 		{
 			for (i in 0...cursorUpgrade.timesPurchased)
 			{
 				cookie.score = cookie.score + 1;
 			}
 			scoreText.text = Std.string(cookie.score);
-			updateScoreFromUpgrades();
+			updateScoreFromCursor();
 		});
-		var grandmaTimer = new FlxTimer().start(1.0, function(timer:FlxTimer)
+	}
+
+	public function updateScoreFromGrandma()
+	{
+		var timer = new FlxTimer().start(1.0, function(timer:FlxTimer)
 		{
 			for (i in 0...grandmaUpgrade.timesPurchased)
 			{
 				cookie.score = cookie.score + 1;
 			}
 			scoreText.text = Std.string(cookie.score);
-			updateScoreFromUpgrades();
+			updateScoreFromGrandma();
 		});
 	}
+
 	public function saveGame()
 	{
 		FlxG.save.data.score = cookie.score;

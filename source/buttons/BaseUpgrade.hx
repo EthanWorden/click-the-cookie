@@ -11,6 +11,7 @@ class BaseUpgrade extends FlxSpriteGroup
     public var basePrice:Int;
     public var timesPurchased:Int;
 	public var upgradeName:String;
+	var backingOL:FlxSprite;
 	var backing:FlxSprite;
 	var upgradeText:FlxText;
 	var costText:FlxText;
@@ -20,8 +21,12 @@ class BaseUpgrade extends FlxSpriteGroup
     {
 		super(x, y);
 
-		backing = new FlxSprite();
+		backingOL = new FlxSprite(0, 0);
+		backingOL.makeGraphic(504, 154, FlxColor.BLACK);
+
+		backing = new FlxSprite(4, 4);
 		backing.makeGraphic(500, 150, FlxColor.GRAY);
+
 		add(backing);
 
 		upgradeText = new FlxText(10, 10);

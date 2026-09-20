@@ -10,6 +10,7 @@ class Main extends Sprite
 	{
 		super();
 		FlxG.save.bind("cookie", "Ethan Worden");
+		// FlxG.save.erase();
 		addChild(new FlxGame(0, 0, PlayState));
 	}
 }

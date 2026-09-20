@@ -2,6 +2,7 @@ package;
 
 import buttons.Cookie;
 import buttons.Cursor;
+import buttons.Farm;
 import buttons.Grandma;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -17,10 +18,13 @@ class PlayState extends FlxState
 
 	var cursorUpgrade:Cursor;
 	var grandmaUpgrade:Grandma;
+	var farmUpgrade:Farm;
 
 	override public function create()
 	{
 		super.create();
+
+		FlxG.autoPause = false;
 
 		// background image
 		background = new FlxSprite(0, 0);
@@ -41,8 +45,12 @@ class PlayState extends FlxState
 		grandmaUpgrade = new Grandma(680, 170);
 		add(grandmaUpgrade);
 
+		farmUpgrade = new Farm(680, 340);
+		add(farmUpgrade);
+
 		updateScoreFromCursor();
 		updateScoreFromGrandma();
+		updateScoreFromFarm();
 
 	}
 
@@ -114,11 +122,25 @@ class PlayState extends FlxState
 		});
 	}
 
+	public function updateScoreFromFarm()
+	{
+		var timer = new FlxTimer().start(1.0, function(timer:FlxTimer)
+		{
+			for (i in 0...farmUpgrade.timesPurchased)
+			{
+				cookie.score = cookie.score + 8;
+			}
+			scoreText.text = Std.string(cookie.score);
+			updateScoreFromFarm();
+		});
+	}
+
 	public function saveGame()
 	{
 		FlxG.save.data.score = cookie.score;
 		FlxG.save.data.cursorOwned = cursorUpgrade.timesPurchased;
 		FlxG.save.data.grandmaOwned = grandmaUpgrade.timesPurchased;
+		FlxG.save.data.farmOwned = farmUpgrade.timesPurchased;
 		FlxG.save.flush();
 		if (FlxG.keys.justPressed.R)
 		{

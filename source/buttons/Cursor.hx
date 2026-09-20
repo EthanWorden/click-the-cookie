@@ -6,9 +6,10 @@ class Cursor extends BaseUpgrade
 {
     public function new(x:Float, y:Float)
     {
-        super(x, y);
+		upgradeName = "Cursor";
         basePrice = 15;
         cost = basePrice;
         timesPurchased = 0;
+		super(x, y);
     }
 }

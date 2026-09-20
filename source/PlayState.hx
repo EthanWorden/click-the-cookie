@@ -33,7 +33,7 @@ class PlayState extends FlxState
 		scoreText.size = 50;
 		add(scoreText);
 
-		cursorUpgrade = new Cursor(0, 0);
+		cursorUpgrade = new Cursor(680, 0);
 		cursorUpgrade.timesPurchased = 0;
 		add(cursorUpgrade);
 

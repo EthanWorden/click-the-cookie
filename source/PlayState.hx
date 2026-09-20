@@ -120,5 +120,10 @@ class PlayState extends FlxState
 		FlxG.save.data.cursorOwned = cursorUpgrade.timesPurchased;
 		FlxG.save.data.grandmaOwned = grandmaUpgrade.timesPurchased;
 		FlxG.save.flush();
+		if (FlxG.keys.justPressed.R)
+		{
+			FlxG.save.erase();
+			FlxG.resetState();
+		}
 	}
 }

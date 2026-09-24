@@ -9,6 +9,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.util.FlxTimer;
+import lime.app.Application;
 
 class PlayState extends FlxState
 {
@@ -47,6 +48,9 @@ class PlayState extends FlxState
 
 		farmUpgrade = new Farm(680, 340);
 		add(farmUpgrade);
+
+		var versionNum:FlxText = new FlxText(5, FlxG.height - 20, 0, "v" + Application.current.meta.get("version"), 12);
+		add(versionNum);
 
 		updateScoreFromCursor();
 		updateScoreFromGrandma();
@@ -92,6 +96,12 @@ class PlayState extends FlxState
 		{
 			cookie.score = cookie.score - grandmaUpgrade.cost;
 			grandmaUpgrade.buyUpgrade();
+			scoreText.text = Std.string(cookie.score);
+		}
+		if (FlxG.mouse.overlaps(farmUpgrade) && FlxG.mouse.justPressed && cookie.score >= farmUpgrade.cost)
+		{
+			cookie.score = cookie.score - farmUpgrade.cost;
+			farmUpgrade.buyUpgrade();
 			scoreText.text = Std.string(cookie.score);
 		}
 	}
